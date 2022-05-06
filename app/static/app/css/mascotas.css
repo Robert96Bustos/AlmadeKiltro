@@ -1,0 +1,36 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    background: #2BC0E4;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #EAECC6, #2BC0E4);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+.container {
+    max-width: 900px;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+}
+
+footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+
+#content-footer {
+    color: #ffff;
+}
