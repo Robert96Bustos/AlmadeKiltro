@@ -2,28 +2,15 @@ from django.db import models
 
 # Create your models here.
 
-opciones_nombre_raza = [
-    [0, "Kiltro"],
-    [1, "Mestizo"],
-    [2, "Poodle"],
-    [3, "Galgo"],
-    [4, "Otro"]
-]
-
 class Raza(models.Model):
-    nombre_raza = models.IntegerField(choices=opciones_nombre_raza)
+    nombre_raza = models.CharField(max_length=250)
 
     def __str__(self):
         return self.nombre_raza
 
-# Opciones especie
-opciones_especie = [
-    [0, "Perro"],
-    [1, "Gato"]
-]
 
 class Especie(models.Model):
-    nombre_especie = models.IntegerField(choices=opciones_especie)
+    nombre_especie = models.CharField(max_length=250)
 
     def __str__(self):
         return self.nombre_especie
@@ -44,13 +31,14 @@ opciones_tamaño = [
 class Mascota(models.Model):
     nombre_mascota = models.CharField(max_length=250)
     imagen = models.ImageField(upload_to="mascota", null=True)
-    edad_mascota = models.IntegerField()
+    edad_mascota = models.CharField(max_length=250)
     sexo = models.IntegerField(choices=opciones_sexo)
     descripcion = models.TextField()
     tamaño = models.IntegerField(choices=opciones_tamaño)
-    peso = models.IntegerField()
-    raza = models.ForeignKey(Raza, on_delete=models.PROTECT)
+    peso = models.CharField(max_length=250)
     especie = models.ForeignKey(Especie, on_delete=models.PROTECT)
+    raza = models.ForeignKey(Raza, on_delete=models.PROTECT)
+   
 
     def __str__(self):
         return self.nombre_mascota
@@ -119,3 +107,21 @@ class Fundacion(models.Model):
 
     def __str__(self):
         return self.nombre_fundacion
+
+# CONTACTO
+opciones_consulta = [
+    [0, "Consulta"],
+    [1, "Reclamo"],
+    [2, "Sugerencia"],
+    [3, "Agradecimientos"]
+]
+
+class Contacto(models.Model):
+    nombre =  models.CharField(max_length=250)
+    correo = models.EmailField()
+    tipo_consulta = models.IntegerField(choices=opciones_consulta)
+    mensaje = models.TextField()
+    avisos = models.BooleanField()
+
+    def __str__(self):
+        return self.nombre
