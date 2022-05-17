@@ -24,11 +24,17 @@
             </button>
             <div class="navbar-collapse collapse justify-content-end" id="miLista">
                 <div class="navbar-nav">
-                    <a href="{% url 'home' %}" class="nav-link">INICIO</a>
-                    <a href="{% url 'mascotas' %}" class="nav-link">ADOPTAR</a>
-                    <a href="{% url 'agregar_mascota' %}" class="nav-link">AGREGAR MASCOTAS</a>
-                    <a href="{% url 'listar_mascotas' %}" class="nav-link">VER MASCOTAS</a>
-                    <a href="{% url 'login' %}" class="nav-link">INICIAR SESION</a>
+                    <a href="{% url 'home' %}" class="nav-link">Inicio</a>
+                    <a href="{% url 'mascotas' %}" class="nav-link">Adoptar</a>
+                    <a href="{% url 'agregar_mascota' %}" class="nav-link">Agregar mascotas</a>
+                    <a href="{% url 'listar_mascotas' %}" class="nav-link">Ver mascotas</a>
+                    <!-- Si está autenticado -->
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a>
+                    <a href="#" class="nav-link">@{{ user.username }}</a>
+                    <!-- Si no está autenticado -->
+                    {% else %}
+                    <a href="{% url 'login' %}" class="nav-link">Iniciar sesión</a> {% endif %}
                 </div>
             </div>
         </div>
