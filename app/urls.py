@@ -9,5 +9,5 @@ urlpatterns = [
     path('agregar-mascota/', agregar_mascota, name="agregar_mascota"),
     path('listar-mascotas/', listar_mascotas, name="listar_mascotas"),
     path('modificar-mascota/<id>/', modificar_mascota, name="modificar_mascota"),
-    path('eliminar_mascota/<id>/', eliminar_mascota, name="eliminar_mascota"),
+    path('eliminar-mascota/<id>/', eliminar_mascota, name="eliminar_mascota"),
 ]

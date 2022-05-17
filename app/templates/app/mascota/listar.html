@@ -1,5 +1,29 @@
 {% extends 'app/base.html' %}
 
+<!-- BLOCK JS  -->
+{% block js %}
+
+<script>
+    function eliminarMascota(id) {
+        Swal.fire({
+                "title": "¿Estas seguro?",
+                "text": "Esta acción no se puede revertir",
+                "icon": "warning",
+                "showCancelButton": true,
+                "cancelButtonText": "Cancelar",
+                "confirmButtonText": "Si, eliminar",
+                "confirmButtonColor": "#dc3545"
+            })
+            .then(function(result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/eliminar-mascota/" + id + "/"
+                }
+            })
+    }
+</script>
+
+{% endblock %}
+
 <!-- CARGA ARCHIVOS ESTATICOS -->
 {% load static %}
 
@@ -39,12 +63,15 @@
                 <td>{{ m.descripcion }}</td>
                 <td class="d-flex">
                     <a href="{% url 'modificar_mascota' m.id %}" class="btn btn-info btn-sm">Modificar</a> &nbsp;
-                    <a href="{% url 'eliminar_mascota' m.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" onclick="eliminarMascota({{ m.id }})" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
 
         </table>
+        <div>
+            {% include 'app/paginator.html' %}
+        </div>
     </div>
 </div>
 

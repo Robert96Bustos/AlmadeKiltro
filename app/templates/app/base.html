@@ -56,7 +56,16 @@
         </div>
     </footer>
 
-    {% block js %} {% endblock %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %} {% for m in messages %}
+    <script>
+        Swal.fire({
+            "title": "Completado",
+            "text": "{{m}}",
+            "icon": "success"
+        })
+    </script>
+    {% endfor %} {% endif %} {% block js %} {% endblock %}
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Mascota
 from .forms import ContactoForm, MascotaForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -40,7 +41,7 @@ def agregar_mascota(request):
         formulario =MascotaForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "Guardado correctamente"
+            messages.success(request, "Mascota registrada")
         else:
             data["form"] = formulario
     return render(request, 'app/mascota/agregar.html', data)
@@ -61,6 +62,7 @@ def modificar_mascota(request, id):
         formulario = MascotaForm(data=request.POST, instance=mascota, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Modificado correctamente")
             return redirect(to="listar_mascotas")
             data["form"] = formulario
     return render(request, 'app/mascota/modificar.html', data)
@@ -68,4 +70,5 @@ def modificar_mascota(request, id):
 def eliminar_mascota(request, id):
     mascota = get_object_or_404(Mascota, id=id)
     mascota.delete()
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_mascotas")
