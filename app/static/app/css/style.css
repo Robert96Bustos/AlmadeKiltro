@@ -11,23 +11,15 @@ img {
     transform: scaleX(-1);
 }
 
-body {
-    background: #2BC0E4;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #EAECC6, #2BC0E4);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    margin: 0;
-    margin-bottom: 40px;
+body{
+    background-color: #F5f4ed;
 }
-
 .container {
     max-width: 900px;
 }
 
 footer {
-    background-color: black;
+    background-color: #000000;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -36,4 +28,12 @@ footer {
 
 #content-footer {
     color: #ffff;
+}
+p{
+    color: #92cdb6 ;
+}
+.nav-link{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: italic;
+    font-weight:300;
 }
