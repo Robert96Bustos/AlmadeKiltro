@@ -13,14 +13,14 @@ i {
 /*----------bootstrap-navbar-css------------*/
 .navbar-logo{
 	padding: 15px;
-	color: #fff;
+	color: #e27222;
 }
 .navbar-mainbg{
-	background-color: #2c9585;
+	background-color: #65b9bd;
 	padding: 0px;
 }
 .nav-link{
-	color: black !important;
+	color: white !important;
 }
 
 

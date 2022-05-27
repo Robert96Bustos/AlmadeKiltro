@@ -14,12 +14,12 @@ img {
 body{
     background-color: whitesmoke;
 }
-.container {
+/* .container {
     max-width: 900px;
-}
+} */
 
 footer {
-    background-color: #000000;
+    background-color: #65b9bd;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -27,11 +27,9 @@ footer {
 }
 
 #content-footer {
-    color: #ffff;
+    color: white !important;
 }
-p{
-    color: #92cdb6 ;
-}
+
 .nav-link{
     font-family: 'Merriweather Sans', sans-serif;
     font-style: italic;
