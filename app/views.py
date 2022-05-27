@@ -7,7 +7,11 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def home(request):
-    return render(request, 'app/home.html')
+    mascotas = Mascota.objects.all()
+    data = {
+        'mascotas': mascotas
+    }
+    return render(request, 'app/home.html', data)
 
 def mascotas(request):
     mascotas = Mascota.objects.all()
@@ -86,3 +90,6 @@ def registro(request):
             return redirect(to="home")
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
+
+def nosotros(request):
+    return render(request, 'app/nosotros.html')
