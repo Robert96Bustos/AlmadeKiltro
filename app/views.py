@@ -3,15 +3,29 @@ from .models import Mascota
 from .forms import ContactoForm, MascotaForm, CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.db.models import Q
 
 # Create your views here.
 
 def home(request):
+    queryset = request.GET.get("buscar")
     mascotas = Mascota.objects.all()
-    data = {
-        'mascotas': mascotas
-    }
-    return render(request, 'app/home.html', data)
+    # data = {
+    #     'mascotas': mascotas
+    # }
+    if queryset:
+        if queryset == 'perro':
+            queryset = 1
+        elif queryset == 'gato':
+            queryset = 2
+        else:
+            queryset = 0
+
+        mascotas = Mascota.objects.filter(
+            Q(especie = queryset)
+        )
+
+    return render(request, 'app/home.html', {'mascotas':mascotas})
 
 def mascotas(request):
     mascotas = Mascota.objects.all()
