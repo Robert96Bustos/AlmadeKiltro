@@ -45,7 +45,6 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mascotas</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                            <a class="dropdown-item" href="{% url 'mascotas' %}">Adoptar una Mascota</a>
                             <a class="dropdown-item" href="{% url 'agregar_mascota' %}">Agregar mascotas</a>
                             <a class="dropdown-item" href="{% url 'listar_mascotas' %}">Ver mascotas</a>
                         </div>
@@ -56,7 +55,7 @@
                         <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">@{{ user.username }}</a>
+                        <a class="nav-link text-capitalize" href="#">Bienvenido {{ user.first_name }}</a>
                     </li>
                     <!-- Si no está autenticado -->
                     {% else %}
@@ -68,7 +67,7 @@
             </div>
         </div>
     </div>
-    <br><br>
+<br>
     <!-- Contenido de la web -->
     <div class="container">
 
@@ -79,7 +78,7 @@
 
     <!-- Footer -->
     <br><br><br>
-    <footer class="fixed-bottom mt-5">
+    <footer class="mt-5">
         <div class="container">
             <div class="row text-center py-3" id="content-footer">
                 <div class="col-md-6">

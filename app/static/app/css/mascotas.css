@@ -21,3 +21,19 @@
     background-color: #e27222;
     border: #e27222;
 }
+.cardMascota{
+    min-height: 300px;
+    max-height: 300px;
+}
+.marginCard{
+    margin-bottom: 40px;
+}
+.imgBanner{
+    width: 100%;
+    height: auto;
+    border-radius: 30px 30px 30px 30px;
+}
+.borderContainer{
+    border: 1px solid rgb(202, 200, 200);
+    border-radius: 5px 5px 5px 5px;
+}

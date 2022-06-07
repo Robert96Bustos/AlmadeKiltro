@@ -1,5 +1,7 @@
+from pickle import NONE
+from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Mascota
+from .models import Especie, Mascota
 from .forms import ContactoForm, MascotaForm, CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -8,31 +10,30 @@ from django.db.models import Q
 # Create your views here.
 
 def home(request):
-    queryset = request.GET.get("buscar")
-    mascotas = Mascota.objects.all()
-    # data = {
-    #     'mascotas': mascotas
-    # }
-    if queryset:
-        if queryset == 'perro':
-            queryset = 1
-        elif queryset == 'gato':
-            queryset = 2
-        else:
-            queryset = 0
+    queryset = request.POST.get("buscar")
+    queryset2 = request.POST.get("buscar2")
+    
+    filtro = []
+    if queryset != None and queryset != '-1':
+        filtro.append(('especie' , int(queryset)))
+    if queryset2 != None and queryset2 != '-1':
+        filtro.append(('sexo' , int(queryset2)))
 
+    mascotas = Mascota.objects.all()
+
+
+    if len(filtro) > 0 :
         mascotas = Mascota.objects.filter(
-            Q(especie = queryset)
-        )
-
-    return render(request, 'app/home.html', {'mascotas':mascotas})
-
-def mascotas(request):
-    mascotas = Mascota.objects.all()
+        *filtro
+    )
     data = {
-        'mascotas': mascotas
+        'mascotas': mascotas,
+        'mensaje': "Lo sentimos no hay mascotas"
     }
-    return render(request, 'app/mascotas.html', data)
+
+
+    return render(request, 'app/home.html', data)
+
 
 def contacto(request):
     data = {
