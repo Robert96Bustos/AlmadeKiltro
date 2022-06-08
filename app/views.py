@@ -31,7 +31,6 @@ def home(request):
         'mensaje': "Lo sentimos no hay mascotas"
     }
 
-
     return render(request, 'app/home.html', data)
 
 
