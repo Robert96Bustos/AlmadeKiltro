@@ -15,19 +15,19 @@
     border-radius: 10px;
     background-color: rgba(245, 245, 245, 0.4);
 }
-#letraInicio{
-    font-family: 'Merriweather Sans', sans-serif;
-    font-style: semi-bold;
-    font-weight:500;
+.letraInicio{
+    font-family: 'Poppins';
+    font-style: ExtraLigth;
+    font-weight:200;
 }
-#letraIngresa{
-    font-family: 'Merriweather Sans', sans-serif;
-    font-style: medium;
+.letraIngresa{
+    font-family: 'Poppins';
+    font-style: Ligth;
     font-weight:300;
 }
-label{
+label , p{
     font-family: 'Merriweather Sans', sans-serif;
-    font-style: italic;
+    font-style: medium;
     font-weight:300;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -38,7 +38,49 @@ label{
     width: 50%;
     margin-top: 20px;
     border-radius: 30px 30px 30px 30px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:300;
 }
 .linkRegistro{
     color: black !important;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
+
+}
+.btnRecuperar{
+    margin-left: auto ;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 30px;
+    border-radius: 30px 30px 30px 30px;
+    height: 60%;
+}
+.btnRegistrar{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.btnRegistro{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:300;
+    border-radius: 30px 30px 30px 30px;
+}
+.letraOlvido{
+    font-family: 'Poppins'; 
+    font-style: italic;
+    font-weight: 400;
+}
+.btnEnviar{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:300;
+    border-radius: 30px 30px 30px 30px;
+    width: 70%;
+    height: 60%;
+    margin-top: 30px;
 }

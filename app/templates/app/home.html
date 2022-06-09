@@ -49,8 +49,8 @@
     <!-- <h2 class="fw-bold text-center mt-5">Nuestros rescatados</h2>
     <hr><br> -->
     <div class="row mt-5">{% for m in mascotas %}
-        <div class="col-lg-3 col-md-4 col-xs-4 offset-xs-4">
-            <div class="card sombra text-center mb-5">
+        <div class="col-lg-3 col-md-4 col-xs-4 offset-xs-4 ">
+            <div class="card sombra text-center mb-5 cardHeader">
                 {% if m.imagen %}
                 <img src="{{ m.imagen.url }}" class="img-fluid mascota mx-auto" alt="..."> 
                 {% endif %}
@@ -61,7 +61,7 @@
                         <p>{{ m.descripcion }}</p>
 
                     </div>
-                    <div class="mt-5 pt-5">
+                    <div class="pt-3 pb-2">
                         <button type="button" class="btn btn-primary shadow btnSolicitar">Solicitar adopción</button>
                     </div>
                     

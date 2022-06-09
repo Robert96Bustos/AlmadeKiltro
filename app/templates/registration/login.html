@@ -12,7 +12,7 @@
     {% load crispy_forms_tags %}
     
     <br>
-    <h2 class="text-center" id="letraInicio">Inicio de sesión</h2>
+    <h2 class="text-center letraInicio">INICIO DE SESIÓN</h2>
     <hr>
     <div class="container">
         <br>
@@ -20,12 +20,12 @@
             <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 ">
                 <div class="card" id="card-login">
                     <div class="card-body">
-                        <h2 id="letraIngresa" class="text-center pb-2">Ingresa tus datos</h2>
+                        <h2 class="text-center letraIngresa pb-2">Ingresa tus datos</h2>
                         <form action="" method="POST">
                             {% csrf_token %} {{form | crispy}}
                             <div class="d-grid gap-2 mt-3">
                                 <input type="submit" class="btn btn-block btn-success text-center btnIniciar" value="Iniciar Sesión">
-                                <a href="{% url 'registro' %}" class="nav-link linkRegistro text-center" >Registrate</a>
+                                <a href="{% url 'registro' %}" class="nav-link linkRegistro text-center btnRegistrar" >Registrate</a>
                             </div>
                             
 

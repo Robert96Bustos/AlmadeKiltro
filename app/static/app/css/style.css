@@ -29,6 +29,16 @@ footer {
 
 .nav-link{
     font-family: 'Merriweather Sans', sans-serif;
-    font-style: italic;
-    font-weight:300;
+    font-style: medium;
+    font-weight:400;
+}
+.tituloListar{
+    font-family: 'Poppins';
+    font-style: ExtraLigth;
+    font-weight:200;
+}
+.letraFooter{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
 }
