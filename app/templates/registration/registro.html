@@ -23,8 +23,8 @@
                         <form action="" method="POST">
                             {% csrf_token %} {{form | crispy}}
                             <div class="d-flex float-end mt-4 pb-3">
-                                <a href="{% url 'login'%}" class="nav-link linkRegistro text-center btnRegistrar">Iniciar sesión</a>
-                                &nbsp;
+                                <a href="{% url 'login'%}" class="linkRegistro text-center mt-2">Iniciar sesión</a>
+                                &nbsp;&nbsp;&nbsp;
                                 <input type="submit" class="btn btn-success float-end btnRegistro px-4" value="Registrarse">
                             </div>
 

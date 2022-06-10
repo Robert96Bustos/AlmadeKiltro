@@ -33,14 +33,13 @@ label , p{
     margin-bottom: 5px;
 }
 .btnIniciar{
-    margin-left: auto ;
-    margin-right: auto;
     width: 50%;
     margin-top: 20px;
     border-radius: 30px 30px 30px 30px;
     font-family: 'Merriweather Sans', sans-serif;
     font-style: medium;
     font-weight:300;
+
 }
 .linkRegistro{
     color: black !important;
@@ -83,4 +82,16 @@ label , p{
     width: 70%;
     height: 60%;
     margin-top: 30px;
+}
+.linkRecuperar{
+    color: black !important;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+}
+.letraLog{
+    font-size: 14px;
 }

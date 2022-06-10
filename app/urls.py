@@ -12,12 +12,19 @@ urlpatterns = [
     path('eliminar-mascota/<id>/', eliminar_mascota, name="eliminar_mascota"),
     path('registro/', registro, name="registro"),
     path('quienes-somos/', nosotros, name="nosotros"),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html")),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name="registration/recuperar_contraseña.html"
     ), name="reset_password"),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name="registration/mensaje_cambio_pw.html"
+    ), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name="registration/cambio_pw_form.html"
+    ), name="password_reset_confirm"),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name="registration/cambio_pw_done.html"
+    ), name="password_reset_complete"),
 
 ]

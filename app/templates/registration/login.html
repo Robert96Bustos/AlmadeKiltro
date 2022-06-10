@@ -23,9 +23,16 @@
                         <h2 class="text-center letraIngresa pb-2">Ingresa tus datos</h2>
                         <form action="" method="POST">
                             {% csrf_token %} {{form | crispy}}
-                            <div class="d-grid gap-2 mt-3">
-                                <input type="submit" class="btn btn-block btn-success text-center btnIniciar" value="Iniciar Sesión">
-                                <a href="{% url 'registro' %}" class="nav-link linkRegistro text-center btnRegistrar" >Registrate</a>
+                            <div>
+                                <a href="{% url 'reset_password' %}" class="linkRecuperar">Recuperar Contraseña</a>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-block btn-success btnIniciar" value="Iniciar Sesión">
+                            </div>
+                            <div class="text-center">
+                                <p class="letraLog">¿No tienes cuenta?</p>
+                                <a href="{% url 'registro' %}" class="linkRegistro">Registrate</a>
                             </div>
                             
 
