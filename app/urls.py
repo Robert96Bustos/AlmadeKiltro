@@ -1,6 +1,6 @@
 from re import template
 from django.urls import path
-from .views import home, contacto, agregar_mascota, listar_mascotas, modificar_mascota, eliminar_mascota, nosotros, registro
+from .views import home, contacto, agregar_mascota, listar_mascotas, modificar_mascota, eliminar_mascota, nosotros, registro, agregar_mascota_desaparecida, mascotasDesaparecidas, formulario_adopcion
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -13,6 +13,9 @@ urlpatterns = [
     path('registro/', registro, name="registro"),
     path('quienes-somos/', nosotros, name="nosotros"),
     path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html")),
+    path('agregar_mascota_desaparecida/', agregar_mascota_desaparecida, name="agregar_mascota_desaparecida"),
+    path('mascotas_desaparecidas/', mascotasDesaparecidas, name="mascotas_desaparecidas"),
+    path('solicitud_adopcion/', formulario_adopcion, name="solicitud_adopcion"),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name="registration/recuperar_contraseña.html"

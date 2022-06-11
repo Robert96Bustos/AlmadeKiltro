@@ -1,6 +1,6 @@
+from tkinter import Widget
 from django.db import models
-
-# Create your models here.
+import datetime
 
 class Raza(models.Model):
     nombre_raza = models.CharField(max_length=250)
@@ -43,33 +43,25 @@ class Mascota(models.Model):
     def __str__(self):
         return self.nombre_mascota
 
-class MascotaPerdida(models.Model):
-    nombre_mascota_perdida = models.CharField(max_length=250)
-    contacto_perdida = models.CharField(max_length=250)
-    fecha_extravio = models.DateField()
-    fecha_publicacion = models.DateField()
-    mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+# Opciones tipo publicacion
+opciones_publicacion = [
+    [0, "Mascota Perdida"],
+    [1, "Mascota Encontrada"]
+]
+class MascotaDesaparecida(models.Model):
+    nombre_desaparecida = models.CharField(max_length=250)
+    imagen = models.ImageField(upload_to="mascotas_desaparecidas", null = True)
+    fecha_desaparecida = models.DateField()
+    fecha_publicacion = models.DateField(auto_now=True)
+    region = models.CharField(max_length=250)
+    comuna = models.CharField(max_length=250)
+    lugar = models.CharField(max_length=250)
+    numero_contacto = models.IntegerField(blank=True, null=True)
+    descripcion = models.TextField()
+    tipo_publicacion = models.IntegerField(choices=opciones_publicacion)
 
     def __str__(self):
-        return self.nombre_mascota_perdida
-
-class MascotaEncontrada(models.Model):
-    nombre_mascota_encontrada = models.CharField(max_length=250)
-    fecha_encontrada = models.DateField()
-    fecha_publicacion = models.DateField()
-    contacto_encontrada = models.CharField(max_length=250)
-    mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.nombre_mascota_encontrada
-
-class MascotaAdopcion(models.Model):
-    nombre_mascota_adopcion = models.CharField(max_length=250)
-    peso = models.IntegerField()
-    mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.nombre_mascota_adopcion
+        return self.nombre_desaparecida
 
 # Opciones tipo vivienda
 opciones_tipo_vivienda = [
@@ -92,8 +84,7 @@ class FormularioAdopcion(models.Model):
     tipo_vivienda = models.IntegerField(choices=opciones_tipo_vivienda)
     direccion = models.CharField(max_length=250)
     otra_mascota = models.BooleanField()
-    fecha_solicitud = models.DateField()
-    estado_solicitud = models.IntegerField()
+    fecha_solicitud = models.DateField(auto_now=True)
     cantidad_mascotas = models.IntegerField(choices=opciones_cantidad_mascotas)
     mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
 

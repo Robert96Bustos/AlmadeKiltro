@@ -8,6 +8,10 @@
     box-shadow: 0px 0px 11px #d5d5d5;
     margin-top: 100px;
 }
+.cardHeader{
+    box-shadow: 0px 0px 11px #d5d5d5;
+    margin-top: 30px;
+}
 .mascota{
     width: 200px;
     height: 200px;
@@ -45,4 +49,15 @@ p{
     font-family: 'Poppins'; 
     font-style: italic;
     font-weight: 400;
+}
+.imagenDesaparecida{
+    border-radius: 5px 5px 5px 5px;
+}
+.bordeFiltro{
+    border: 1px solid rgb(202, 200, 200);
+    border-radius: 5px 5px 5px 5px;
+}
+.linkSolicitar{
+    color: white;
+    background-color: #e27222;
 }
