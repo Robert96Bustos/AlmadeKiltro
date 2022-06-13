@@ -17,6 +17,9 @@
 <!-- Contenido de la web -->
 <div class="container ">
     <div class="row">
+        <h2 class="text-center letraInicio">¿Encontraste o Perdiste una mascota? &nbsp; &nbsp;<a class="btn btn-outline linkPublicar" href="{% url 'agregar_mascota_desaparecida' %}">Publicala!</a></h2>
+        
+        <hr>
         <div class="col-6 offset-6 search bordeFiltro pt-2">
             <form method="POST" class="row justify-content-between">
                 {% csrf_token %}

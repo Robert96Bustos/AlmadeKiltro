@@ -21,13 +21,20 @@ urlpatterns = [
         template_name="registration/recuperar_contraseña.html"
     ), name="reset_password"),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
-        template_name="registration/mensaje_cambio_pw.html"
+        template_name="registration/recuperar_mensaje.html"
     ), name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
-        template_name="registration/cambio_pw_form.html"
+        template_name="registration/recuperar_form.html"
     ), name="password_reset_confirm"),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
-        template_name="registration/cambio_pw_done.html"
+        template_name="registration/recuperar_done.html"
     ), name="password_reset_complete"),
+    
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+        template_name = "registration/cambiar_pw.html"
+    ), name="password_change"),
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(
+        template_name = "registration/cambiar_pw_done.html"
+    ), name="password_change"),
 
 ]

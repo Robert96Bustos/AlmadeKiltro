@@ -27,7 +27,7 @@ footer {
     color: white !important;
 }
 
-.nav-link{
+.nav-link, .dropdown-item{
     font-family: 'Merriweather Sans', sans-serif;
     font-style: medium;
     font-weight:400;

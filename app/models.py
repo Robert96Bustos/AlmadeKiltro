@@ -101,18 +101,17 @@ class Fundacion(models.Model):
 
 # CONTACTO
 opciones_consulta = [
-    [0, "Consulta"],
-    [1, "Reclamo"],
-    [2, "Sugerencia"],
-    [3, "Agradecimientos"]
+    ['Consulta', "Consulta"],
+    ['Reclamo', "Reclamo"],
+    ['Sugerencia', "Sugerencia"],
+    ['Agradecimientos', "Agradecimientos"]
 ]
 
 class Contacto(models.Model):
     nombre =  models.CharField(max_length=250)
     correo = models.EmailField()
-    tipo_consulta = models.IntegerField(choices=opciones_consulta)
+    tipo_consulta = models.CharField(max_length=20, choices=opciones_consulta)
     mensaje = models.TextField()
-    avisos = models.BooleanField()
 
     def __str__(self):
         return self.nombre

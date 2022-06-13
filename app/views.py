@@ -1,5 +1,7 @@
 from cgitb import reset
+import email
 from pickle import NONE
+import re
 from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Mascota, MascotaDesaparecida
@@ -7,8 +9,10 @@ from .forms import ContactoForm, MascotaForm, CustomUserCreationForm, MascotaDes
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Create your views here.
 def home(request):
@@ -59,12 +63,20 @@ def contacto(request):
         'form': ContactoForm()
     }
     if request.method == 'POST':
-        formulario = ContactoForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Mensaje enviado"
-        else:
-            data["form"] = formulario
+        to= request.POST.get('correo')
+        content = request.POST.get('mensaje')
+        nombre = request.POST.get('nombre')
+        asunto = request.POST.get('tipo_consulta')
+
+        email_from = settings.EMAIL_HOST_USER
+
+        html_content = render_to_string("app/email_template.html",{'asunto':asunto, 'content':content, 'nombre':nombre})
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives(asunto,text_content,email_from,[to, settings.EMAIL_HOST_USER])
+        email.attach_alternative(html_content,"text/html")
+        email.send()
+        messages.success(request, "Solicitud enviada con exito uno de nuestros voluntarios se comunicara con usted.")
+        return render(request,"app/nosotros.html")
 
     return render(request, 'app/contacto.html', data)
 

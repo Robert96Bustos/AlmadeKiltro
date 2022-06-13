@@ -6,23 +6,23 @@
 <!-- BLOCK CSS -->
 {% block css %}
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'app/css/mascotas.css' %}"> {% endblock %}
+<link rel="stylesheet" href="{% static 'app/css/login.css' %}">
+{% endblock %}
 
 <!-- BLOCK CONTENIDO -->
 {% block contenido %} {% load crispy_forms_tags %}
-<h2 class="fw-bold text-center">Editar mascotas</h2>
+<h2 class="text-center letraInicio">EDITAR MASCOTAS</h2>
 <hr>
 <div class="row">
-    <div class="col-12 col-md-6 offset-md-3">
-        <div class="card">
+    <div class="col-12 col-md-8 offset-md-2">
+        <div class="card" id="cardAgregar">
             <div class="card-body">
                 <form action="" method="POST" enctype="multipart/form-data">
 
                     {% csrf_token %} {{form | crispy }}
 
-                    <div class="d-flex justify-content-end">
-                        <input type="reset" value="Cancelar" class="btn btn-secondary"> &nbsp;
+                    <div class="d-flex justify-content-end mt-3">
+                        <!-- <input type="reset" value="Cancelar" class="btn btn-secondary"> &nbsp; -->
                         <input type="submit" value="Editar" class="btn btn-primary">
                     </div>
 

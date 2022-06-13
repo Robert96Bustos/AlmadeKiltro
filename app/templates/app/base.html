@@ -43,22 +43,24 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'nosotros' %}">¿Quienes Somos?</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'mascotas_desaparecidas' %}">Mascotas Perdidas</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mascotas</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                             <a class="dropdown-item" href="{% url 'agregar_mascota' %}">Agregar mascotas</a>
                             <a class="dropdown-item" href="{% url 'listar_mascotas' %}">Ver mascotas</a>
-                            <a class="dropdown-item" href="{% url 'agregar_mascota_desaparecida' %}">Agregar Mascotas Desaparecidas</a>
-                            <a class="dropdown-item" href="{% url 'mascotas_desaparecidas' %}">Mascotas Desaparecidas</a>
                         </div>
                     </li>
                      <!-- Si está autenticado -->
                      {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-capitalize" href="#">Bienvenido {{ user.first_name }}</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: capitalize;">Bienvenido {{ user.first_name }}</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Cambiar Contraseña</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </div>
                     </li>
                     <!-- Si no está autenticado -->
                     {% else %}
