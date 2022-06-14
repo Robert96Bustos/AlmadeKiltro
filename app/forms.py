@@ -31,4 +31,4 @@ class MascotaDesaparecidaForm(forms.ModelForm):
 class FormularioAdopcionForm(forms.ModelForm):
     class Meta:
         model = FormularioAdopcion
-        fields = '__all__'
+        fields = ["nombres","apellidos","edad","telefono","tipo_vivienda","direccion","otra_mascota","cantidad_mascotas","mascota"]

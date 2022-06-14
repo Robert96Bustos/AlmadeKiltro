@@ -1,6 +1,4 @@
-from tkinter import Widget
 from django.db import models
-import datetime
 
 class Raza(models.Model):
     nombre_raza = models.CharField(max_length=250)
@@ -45,8 +43,8 @@ class Mascota(models.Model):
 
 # Opciones tipo publicacion
 opciones_publicacion = [
-    [0, "Mascota Perdida"],
-    [1, "Mascota Encontrada"]
+    ['Mascota Perdida', "Mascota Perdida"],
+    ['Mascota Encontrada', "Mascota Encontrada"]
 ]
 class MascotaDesaparecida(models.Model):
     nombre_desaparecida = models.CharField(max_length=250)
@@ -58,7 +56,7 @@ class MascotaDesaparecida(models.Model):
     lugar = models.CharField(max_length=250)
     numero_contacto = models.IntegerField(blank=True, null=True)
     descripcion = models.TextField()
-    tipo_publicacion = models.IntegerField(choices=opciones_publicacion)
+    tipo_publicacion = models.CharField(max_length=50,choices=opciones_publicacion)
 
     def __str__(self):
         return self.nombre_desaparecida
@@ -75,6 +73,11 @@ opciones_cantidad_mascotas = [
     [2, "2"],
     [3, "Más de 2"]
 ]
+opciones_estado_solicitud=[
+    ['Pendiente', "Pendiente"],
+    ['Aprobada', "Aprobada"],
+    ['Rechazada', "Rechazada"],
+]
 
 class FormularioAdopcion(models.Model):
     nombres = models.CharField(max_length=250)
@@ -86,7 +89,8 @@ class FormularioAdopcion(models.Model):
     otra_mascota = models.BooleanField()
     fecha_solicitud = models.DateField(auto_now=True)
     cantidad_mascotas = models.IntegerField(choices=opciones_cantidad_mascotas)
-    mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+    mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)  
+    estado_solicitud = models.CharField(max_length=50, choices=opciones_estado_solicitud, default='Pendiente')
 
     def __str__(self):
         return self.nombres

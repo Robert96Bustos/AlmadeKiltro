@@ -46,13 +46,15 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'mascotas_desaparecidas' %}">Mascotas Perdidas</a>
                     </li>
+                    {% if perms.app.add_mascota %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mascotas</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mascotas Fundación</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                             <a class="dropdown-item" href="{% url 'agregar_mascota' %}">Agregar mascotas</a>
                             <a class="dropdown-item" href="{% url 'listar_mascotas' %}">Ver mascotas</a>
                         </div>
                     </li>
+                    {% endif %}
                      <!-- Si está autenticado -->
                      {% if user.is_authenticated %}
                     <li class="nav-item dropdown">

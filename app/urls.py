@@ -1,6 +1,6 @@
 from re import template
 from django.urls import path
-from .views import home, contacto, agregar_mascota, listar_mascotas, modificar_mascota, eliminar_mascota, nosotros, registro, agregar_mascota_desaparecida, mascotasDesaparecidas, formulario_adopcion
+from .views import listar_solicitudes,eliminar_mascota_desaparecida,listar_mascotas_desaparecidas,home, contacto, agregar_mascota, listar_mascotas, modificar_mascota, eliminar_mascota, nosotros, registro, agregar_mascota_desaparecida, mascotasDesaparecidas, formulario_adopcion, ListaMascotasListView, ListMascotasPdf
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -14,8 +14,13 @@ urlpatterns = [
     path('quienes-somos/', nosotros, name="nosotros"),
     path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html")),
     path('agregar_mascota_desaparecida/', agregar_mascota_desaparecida, name="agregar_mascota_desaparecida"),
+    path('listar_mascota_desaparecida/', listar_mascotas_desaparecidas, name="listar_mascotas_desaparecidas"),
+    path('eliminar_desaparecida/<id>/', eliminar_mascota_desaparecida, name="eliminar_mascota_desaparecida"),
     path('mascotas_desaparecidas/', mascotasDesaparecidas, name="mascotas_desaparecidas"),
     path('solicitud_adopcion/', formulario_adopcion, name="solicitud_adopcion"),
+    path('listado_solicitudes/', listar_solicitudes, name="listar_solicitudes"),
+    path('lista_mascota/', ListaMascotasListView.as_view(),name="lista_mascota"),
+    path('list_mascota_pdf/', ListMascotasPdf.as_view(),name="mascotas_all"),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name="registration/recuperar_contraseña.html"
