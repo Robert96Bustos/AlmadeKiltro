@@ -11,23 +11,12 @@ img {
     transform: scaleX(-1);
 }
 
-body {
-    background: #2BC0E4;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #EAECC6, #2BC0E4);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    margin: 0;
-    margin-bottom: 40px;
-}
-
-.container {
-    max-width: 900px;
+body{
+    background-color: whitesmoke;
 }
 
 footer {
-    background-color: black;
+    background-color: #65b9bd;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -35,5 +24,21 @@ footer {
 }
 
 #content-footer {
-    color: #ffff;
+    color: white !important;
+}
+
+.nav-link, .dropdown-item{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
+}
+.tituloListar{
+    font-family: 'Poppins';
+    font-style: ExtraLigth;
+    font-weight:200;
+}
+.letraFooter{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-style: medium;
+    font-weight:400;
 }
