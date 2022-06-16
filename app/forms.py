@@ -1,7 +1,3 @@
-from dataclasses import field
-from operator import attrgetter
-from tkinter import Widget
-from turtle import width
 from django import forms
 from .models import Contacto, Mascota, MascotaDesaparecida, FormularioAdopcion
 from django.contrib.auth.forms import UserCreationForm
