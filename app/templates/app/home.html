@@ -55,10 +55,11 @@
                         <hr>
                         <p>{{ m.descripcion }}</p>
                     </div>
-                    <div class="pt-3 pb-2">
-                        <a href="{% url 'solicitud_adopcion'%}" class="btn btn-outline linkSolicitar text-center mt-2">Solicitar Adopción</a>
-                    </div>               
+                                  
                 </div>
+                <div class="pt-3 pb-2 mb-3">
+                    <a href="{% url 'solicitud_adopcion'%}" class="btn btn-outline linkSolicitar text-center mt-2">Solicitar Adopción</a>
+                </div> 
             </div>
         </div>
         {% empty %}

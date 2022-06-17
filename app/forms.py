@@ -1,3 +1,5 @@
+from dataclasses import fields
+from pyexpat import model
 from django import forms
 from .models import Contacto, Mascota, MascotaDesaparecida, FormularioAdopcion
 from django.contrib.auth.forms import UserCreationForm
@@ -24,7 +26,13 @@ class MascotaDesaparecidaForm(forms.ModelForm):
         model = MascotaDesaparecida
         fields = '__all__'
 
+class FormularioSolicitudes(forms.ModelForm):
+    class Meta:
+        model = FormularioAdopcion
+        fields= '__all__'
+
+
 class FormularioAdopcionForm(forms.ModelForm):
     class Meta:
         model = FormularioAdopcion
-        fields = ["nombres","apellidos","edad","telefono","tipo_vivienda","direccion","otra_mascota","cantidad_mascotas","mascota"]
+        fields = ["edad","telefono","tipo_vivienda","direccion","otra_mascota","cantidad_mascotas","mascota","estado_solicitud"]

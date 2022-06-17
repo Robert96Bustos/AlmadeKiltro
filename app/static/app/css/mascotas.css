@@ -4,6 +4,11 @@
 }
  */
 
+#letraFooter{
+    font-family: 'Merriweather Sans', sans-serif !important;
+    font-style: medium !important;
+    font-weight:400 !important;
+}
 .sombra{
     box-shadow: 0px 0px 11px #d5d5d5;
     margin-top: 100px;
@@ -26,7 +31,7 @@
     border: #07889B;
 }
 .cardMascota{
-    min-height: 300px;
+    min-height: 280px;
 }
 /* .marginCard{
     margin-bottom: 40px;
@@ -52,6 +57,8 @@ p{
 }
 .imagenDesaparecida{
     border-radius: 5px 5px 5px 5px;
+    max-height: 230px;
+
 }
 .bordeFiltro{
     border: 1px solid rgb(202, 200, 200);
@@ -89,4 +96,8 @@ label , p{
     font-family: 'Poppins';
     font-style: ExtraLigth;
     font-weight:200;
+}
+
+.cardMascotaDesaparecida{
+    height: 1100px;
 }

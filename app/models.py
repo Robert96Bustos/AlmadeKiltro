@@ -63,15 +63,18 @@ class MascotaDesaparecida(models.Model):
 
 # Opciones tipo vivienda
 opciones_tipo_vivienda = [
-    [0, "Casa"],
-    [1, "Departamento"]
+    ['Casa', "Casa"],
+    ['Departamento', "Departamento"]
 ]
 # Opciones tipo vivienda
 opciones_cantidad_mascotas = [
     [0, "0"],
     [1, "1"],
     [2, "2"],
-    [3, "Más de 2"]
+    [3, "3"],
+    [4, "4"],
+    [5, "5"],
+    [6, "6"]
 ]
 opciones_estado_solicitud=[
     ['Pendiente', "Pendiente"],
@@ -84,7 +87,7 @@ class FormularioAdopcion(models.Model):
     apellidos = models.CharField(max_length=250)
     edad = models.IntegerField()
     telefono = models.IntegerField()
-    tipo_vivienda = models.IntegerField(choices=opciones_tipo_vivienda)
+    tipo_vivienda = models.CharField(max_length=50,choices=opciones_tipo_vivienda)
     direccion = models.CharField(max_length=250)
     otra_mascota = models.BooleanField()
     fecha_solicitud = models.DateField(auto_now=True)

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Mascota, MascotaDesaparecida, FormularioAdopcion
-from .forms import ContactoForm, MascotaForm, CustomUserCreationForm, MascotaDesaparecidaForm, FormularioAdopcionForm
+from .forms import FormularioSolicitudes,ContactoForm, MascotaForm, CustomUserCreationForm, MascotaDesaparecidaForm, FormularioAdopcionForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -69,13 +69,13 @@ def agregar_mascota_desaparecida(request):
         form = MascotaDesaparecidaForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, "Aviso de mascota encontrada con exito.")
+            messages.success(request, "Mascota Publicada con exito")
             return redirect(to="mascotas_desaparecidas")
         else:
             data["form"]=form
     return render(request, 'app/mascotas_desaparecidas/agregar.html', data)
 
-
+@permission_required('app.view_mascotadesaparecida')
 def listar_mascotas_desaparecidas(request):
     mascotas = MascotaDesaparecida.objects.all()
     data = {
@@ -83,7 +83,7 @@ def listar_mascotas_desaparecidas(request):
     }
     return render(request, 'app/mascotas_desaparecidas/listar.html', data)
 
-
+@permission_required('app.delete_mascotadesaparecida')
 def eliminar_mascota_desaparecida(request, id):
     mascota = get_object_or_404(MascotaDesaparecida, id=id)
     mascota.delete()
@@ -136,37 +136,85 @@ def eliminar_mascota(request, id):
     messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_mascotas")
 
-@login_required
-def formulario_adopcion(request):
-    data = {
-        'form': FormularioAdopcionForm()
+
+@permission_required('app.change_formularioadopcion')
+def rechazar_solicitud(request, id):
+    solicitud = get_object_or_404(FormularioAdopcion, id=id)
+    solicitud.estado_solicitud = 'Rechazada'
+    solicitud.save()
+
+    messages.success(request, "Rechazada correctamente")
+    return redirect(to="listar_solicitudes")
+
+@permission_required('app.change_formularioadopcion')
+def aceptar_solicitud(request, id):
+    solicitud = get_object_or_404(FormularioAdopcion, id=id)
+    solicitud.estado_solicitud = 'Aprobada'
+    solicitud.save()
+    
+
+    messages.success(request, "Aprobada correctamente")
+    return redirect(to="listar_solicitudes")
+
+
+@permission_required('app.delete_formularioadopcion')
+def eliminar_solicitudes(request, id):
+    solicitud = get_object_or_404(FormularioAdopcion, id=id)
+    solicitud.delete()
+    messages.success(request, "Eliminado correctamente")
+    return redirect(to="listar_mascotas")
+
+@permission_required('app.view_formularioadopcion')
+def ver_rechazada(request, id):
+    solicitudes = get_object_or_404(FormularioAdopcion, id=id)
+    data ={
+        'form': FormularioSolicitudes(instance=solicitudes)
     }
-    if request.method =='POST':
-        form = FormularioAdopcionForm(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
+    return render(request,'app/mascota/ver_rechazadas.html',data)
 
-            subject = "Solicitud de Adopción - Mascota Numero:" + " " + request.POST["mascota"]
-            message = request.POST["nombres"]+" "+ request.POST["apellidos"]+ " "+ request.POST["telefono"]
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list=["dekiltroalma@gmail.com"]
 
-            send_mail(subject, message, email_from, recipient_list)
 
-            messages.success(request, "Solicitud de adopción enviada correctamente, uno de nuestros voluntarios se comunicara con usted.")
-            return render(request,"app/nosotros.html")
-        else:
-            data["form"]=form
-    return render(request, 'app/mascota/form_adopcion.html', data)
 
+@permission_required('app.view_formularioadopcion')
+def ver_aprobada(request, id):
+    solicitudes = get_object_or_404(FormularioAdopcion, id=id)
+    data ={
+        'form': FormularioSolicitudes(instance=solicitudes)
+    }
+    return render(request,'app/mascota/ver_aprobadas.html',data)
+
+@permission_required('app.view_formularioadopcion')
+def ver_solicitud(request, id):
+    solicitudes = get_object_or_404(FormularioAdopcion, id=id)
+    data ={
+        'form': FormularioSolicitudes(instance=solicitudes)
+    }
+    return render(request,'app/mascota/ver_solicitudes.html',data)
+
+@permission_required('app.view_formularioadopcion')
+def listar_rechazadas(request):
+    solicitudes = FormularioAdopcion.objects.all().order_by('-fecha_solicitud')
+    data = {
+        'solicitudes': solicitudes
+    }
+    return render(request, 'app/mascota/solicitudes_rechazadas.html', data)
+
+@permission_required('app.view_formularioadopcion')
+def listar_aprobadas(request):
+    solicitudes = FormularioAdopcion.objects.all().order_by('-fecha_solicitud')
+    data = {
+        'solicitudes': solicitudes
+    }
+    return render(request, 'app/mascota/solicitudes_aprobadas.html', data)
+
+
+@permission_required('app.view_formularioadopcion')
 def listar_solicitudes(request):
     solicitudes = FormularioAdopcion.objects.all().order_by('-fecha_solicitud')
     data = {
         'solicitudes': solicitudes
     }
     return render(request, 'app/mascota/listar_solicitudes.html', data)
-
-
 
 
 # Registro de usuario
@@ -200,7 +248,7 @@ def contacto(request):
 
         email_from = settings.EMAIL_HOST_USER
 
-        html_content = render_to_string("app/email_template.html",{'asunto':asunto, 'content':content, 'nombre':nombre})
+        html_content = render_to_string("app/contacto_email.html",{'asunto':asunto, 'content':content, 'nombre':nombre})
         text_content = strip_tags(html_content)
         email = EmailMultiAlternatives(asunto,text_content,email_from,[to, settings.EMAIL_HOST_USER])
         email.attach_alternative(html_content,"text/html")
@@ -209,6 +257,54 @@ def contacto(request):
         return render(request,"app/nosotros.html")
 
     return render(request, 'app/contacto.html', data)
+
+@login_required
+def formulario_adopcion(request):
+    data = {
+        'form': FormularioAdopcionForm()
+    }
+    if request.method =='POST':
+        form = FormularioAdopcionForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            nombres = form.save(commit=False)
+            nombres.nombres = request.user.first_name
+            nombres.save()
+
+            apellidos = form.save(commit=False)
+            apellidos.apellidos = request.user.last_name
+            apellidos.save()
+
+            to = request.user.email
+            subject = "Solicitud de Adopción - Mascota Numero:" + " " + request.POST["mascota"]
+            nombre = request.user.first_name +" "+ request.user.last_name
+            contacto = request.POST["telefono"]
+            edad = request.POST["edad"]
+            tipo_vivienda = request.POST["tipo_vivienda"]
+            direccion = request.POST["direccion"]
+            cant_mascota = request.POST["cantidad_mascotas"]
+            estado_solicitud = request.POST["estado_solicitud"]
+
+            email_from = settings.EMAIL_HOST_USER
+            
+            form.save()
+
+            html_content = render_to_string("app/solicitud_email.html",{'nombre':nombre, 'contacto':contacto, 'edad':edad, 'tipo_vivienda':tipo_vivienda, 'direccion':direccion, 'cant_mascota':cant_mascota, 'subject':subject,'estado_solicitud':estado_solicitud})
+
+            text_content = strip_tags(html_content)
+            email= EmailMultiAlternatives(subject,text_content,email_from,[to, settings.EMAIL_HOST_USER])
+            email.attach_alternative(html_content,"text/html")
+            email.send()
+            messages.success(request, "Solicitud de adopción enviada correctamente, uno de nuestros voluntarios se comunicara con usted.")
+            return render(request,"app/nosotros.html")
+            
+        else:
+            data["form"]=form
+    return render(request, 'app/mascota/form_adopcion.html', data)
+
+
+
+
+
 
 def nosotros(request):
     return render(request, 'app/nosotros.html')
